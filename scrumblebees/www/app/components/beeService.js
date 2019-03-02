@@ -10,13 +10,15 @@ let api = axios.create({
 let _state = {
   posts: [],
   comments: [],
-  targetPostId: ''
+  targetPostId: '',
+  searches: []
 }
 
 let _subscribers = {
   posts: [],
   comments: [],
-  targetPostId: []
+  targetPostId: [],
+  searches: []
 
 }
 
@@ -27,6 +29,12 @@ function setState(prop, val) {
 
 
 export default class BeeService {
+  subComment(data, commentId) {
+    api.put(`/comments/${commentId}/sub-comments`, data)
+      .then(res => {
+        console.log(res.data)
+      })
+  }
 
 
   addSubscribers(prop, fn) {
@@ -36,6 +44,9 @@ export default class BeeService {
   get posts() {
     return _state.posts.map(p => new Post(p))
   }
+  get searches() {
+    return _state.searches.map(s => new Post(s))
+  }
 
   get comments() {
     return _state.comments.map(c => new Comment(c))
@@ -43,6 +54,44 @@ export default class BeeService {
 
   get PostId() {
     return _state.targetPostId
+  }
+
+  mostUp() {
+    let posts = _state.posts
+    let postValues = posts.map(v => {
+      return v
+    })
+    let highest = 0
+    postValues.sort((a, b) => {
+      let val = a.value - b.value
+      if (val > 0) {
+        return -1
+      }
+      else if (val < 0) {
+        return 1
+      }
+      return 0
+    })
+    setState('posts', postValues)
+  }
+
+  mostDown() {
+    let posts = _state.posts
+    let postValues = posts.map(v => {
+      return v
+    })
+    let highest = 0
+    postValues.sort((a, b) => {
+      let val = a.value - b.value
+      if (val > 0) {
+        return 1
+      }
+      else if (val < 0) {
+        return -1
+      }
+      return 0
+    })
+    setState('posts', postValues)
   }
 
   getPosts() {
@@ -62,28 +111,33 @@ export default class BeeService {
   }
 
   makeComment(newComment) {
-    event.preventDefault()
-    api.post('comment/' + newComment.postId)
+    api.post('comments/', newComment)
       .then(res => {
+        console.log(res.data)
         this.getComments(newComment.postId)
       })
   }
 
-  getComments(id) {
-    api.get("comments/" + id)
-      .then(res => {
-        let data = res.data.map(c => new Comment(c))
-        setState('targetPostId', id)
-        setState("comments", data)
-
-      })
+  getComments(id, viewing) {
+    if (document.getElementById("comments-" + id).getAttribute('hidden') || viewing) {
+      api.get("comments/" + id)
+        .then(res => {
+          let data = res.data.map(c => new Comment(c))
+          setState('targetPostId', id)
+          setState("comments", data)
+        })
+      document.getElementById("comments-" + id).removeAttribute('hidden')
+    }
+    else if (!viewing) {
+      document.getElementById("comments-" + id).setAttribute('hidden', true)
+    }
   }
+
   deletePost(id) {
     api.delete('posts/' + id)
       .then(res => {
         this.getPosts()
       })
-
   }
 
   deleteComment(id) {
@@ -91,15 +145,17 @@ export default class BeeService {
       .then(res => {
         console.log(res)
         setState('targetPostId', res.data.postId)
-        this.getComments(res.data.postId)
+        this.getComments(res.data.postId, true)
       })
   }
 
-  editPost(newData) {
+  editPost(newData, oldId) {
     api.put(('posts/' + newData.id), newData)
       .then(res => {
-        this.getPosts()
+        console.log(res.data)
+        document.getElementById('old-' + oldId).innerText = res.data.text
       })
+    form.reset()
   }
 
   votes(id, str) {
@@ -119,4 +175,35 @@ export default class BeeService {
         this.getPosts()
       })
   }
+
+  votesComment(id, str) {
+    let comment = _state.comments.find(c => c._id == id)
+    if (str == 'plus') {
+      if (comment) {
+        comment.value++
+      }
+    } else {
+      if (comment) {
+        comment.value--
+      }
+    }
+    //let postId = comment.postId
+    api.put(('comments/' + id), comment)
+      .then(res => {
+        this.getComments(_state.targetPostId, true)
+      })
+  }
+
+  search(query) {
+    let arr = _state.posts
+    let searches = []
+    for (let i = 0; i < arr.length; i++) {
+      let values = Object.values(arr[i]).filter(v => typeof v == 'string')
+      values.forEach(v => {
+        v.toLowerCase().includes(query.toLowerCase()) && !searches.includes(arr[i]) ? searches.push(arr[i]) : ''
+      })
+    }
+    setState('searches', searches)
+  }
 }
+// && _state.comments

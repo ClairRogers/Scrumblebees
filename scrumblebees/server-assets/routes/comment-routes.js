@@ -36,6 +36,16 @@ router.put('/:id/sub-comments', (req, res, next) => {
     .catch(next)
 })
 
+router.put('/:id', (req, res, next) => {
+  Comment.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
+    .then(p => {
+      res.status(200).send(p)
+    })
+    .catch(err => {
+      res.status(500).send({ Error: err })
+    })
+})
+
 router.delete('/:id', (req, res, next) => {
   Comment.findOneAndDelete({ _id: req.params.id })
     .then(oldData => {

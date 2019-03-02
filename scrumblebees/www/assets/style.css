@@ -1,6 +1,13 @@
 body {
   font-family: 'Montserrat Alternates', sans-serif;
-  scroll-behavior: smooth
+}
+
+html {
+    scroll-behavior: smooth
+}
+
+a {
+  text-decoration: none;
 }
 
 .landingPage {
@@ -10,17 +17,89 @@ body {
   background-size: cover;
   background-attachment: fixed;
 }
-
+h3{
+color: #343a40;  
+}
 .btn {
 background-color:grey;
 color:rgb(255, 204, 0);
 }
 
-#posts {
-  z-index: 10
+.votes {
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
+.commentalign {
+  display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+#scroll {
+  transition: all 0.3s linear;
+  color: #343a40;
+}
+
+#scroll:hover {
+  transform:scale(1.2);
+  font-weight: bold;
+}
+
+.commentwidth {
+  width: 90%
+}
+
+.honeycomb {
+  background-color: #ffd65c;
+  background-image: url("https://www.transparenttextures.com/patterns/honey-im-subtle.png");
+}
+
+
 
 #submitButton {
   max-height:30px;
   width:auto;
+}
+
+
+.commentform {
+position: sticky;
+top: 4rem;
+margin: 50px;
+}
+
+.fas{
+  color: white;
+  float: right;
+  cursor: pointer;
+}
+
+.bee{
+  position: sticky;
+    z-index:100;
+    height: 100px;
+    width: 125px;
+  -webkit-animation-name: bee;
+-webkit-animation-duration: 2s;
+animation-name: bee;
+animation-duration: 4s;
+animation-delay: 1s;
+animation-iteration-count: 5;
+}
+@-webkit-keyframes bee {
+  0%   {right:0px; top:0px;}
+  25%  {right:300px; top:0px;}
+  50%  {right:600px; top:0px;}
+  75%  {right:900px; top:0px;}
+  100% {right:1200px; top:0px;}
+};
+@keyframes bee {
+  0%   {right:0px; top:0px;}
+  25%  {right:300px; top:0px;}
+  50%  {right:600px; top:0px;}
+  75%  {right:900px; top:0px;}
+  100% {right:1200px; top:0px;}
 }

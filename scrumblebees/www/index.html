@@ -15,24 +15,81 @@
 </head>
 
 <body>
+  <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">BuzzFeed</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <div class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Sort by:
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" onclick="app.controllers.beeController.mostUp()">Most Upvoted</a>
+              <a class="dropdown-item" onclick="app.controllers.beeController.mostDown()">Most Downvoted</a>
+              <a class="dropdown-item" href="#">Most Recent</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0" onsubmit="app.controllers.beeController.search(event)">
+        <input class="form-control mr-sm-2" type="search" name="search" placeholder="Enter Keyword" aria-label="Search">
+        <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
+        <i onclick="app.controllers.beeController.redrawPosts()" class="fas fa-sync-alt ml-3"></i>
+      </form>
+    </div>
+  </nav>
   <section class="container-fluid landingPage">
-    <div class="row d-flex h-100 jusfity-content-center align-items-center">
+    <div class="row">
+      <div class="col d-flex justify-content-end">
+        <img class="bee sticky-top" src="./assets/bee.png" alt="">
+      </div>
+    </div>
+    <div class="row d-flex h-60 jusfity-content-center align-items-center">
       <div class="col-4 offset-2">
-        <h1>BEE</h1>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores, laboriosam id quaerat ea voluptate
-          distinctio excepturi harum voluptatum hic dolorum, velit magni quibusdam impedit natus tenetur rem consequatur
-          provident maiores.</p>
+        <h1>BuzzFeed</h1>
+        <p>Worker bees are the most familiar-looking member of the honeybee hive, as they make up about 99% of each
+          colony's
+          population. Worker bees are all female, and they do almost everything for the hive. From birth to her death 45
+          days later, the
+          worker bee is given different tasks to do during different stages of her life. Worker bees are responsible for
+          everything from feeding the larvae (the baby bees), to tending to the queen, to cleaning the hive, to
+          collecting food,
+          to guarding the colony, to building honeycomb.
+        </p>
+      </div>
+    </div>
+    <div id="scroll">
+      <div class="row justify-content-center mt-5">
+        <div class="col-3 text-center">
+          <div id="scrollDown">
+            <a href="#posts">
+              <h3 class="viewPostHome">View Posts</h3>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-3 d-flex justify-content-center viewPostHome">
+          <a href="#posts">
+            <h3><i class="fas fa-angle-double-down text-center viewPostHome" style="color: #343a40;" id="downArrow"></i>
+            </h3>
+          </a>
+        </div>
       </div>
     </div>
   </section>
-  <section class="container">
+  <section class="container-fluid honeycomb">
     <div class="row">
-      <div id="posts" class="col-8">
+      <div id="posts" class="col-8 mt-5">
       </div>
       <div class="col-4">
 
-        <form class="card p-3 sticky-top mt-5" onsubmit="app.controllers.beeController.makeNewPost(event)"
+        <form class="card p-3 commentform mt-5" onsubmit="app.controllers.beeController.makeNewPost(event)"
           id="makePost">
           <div class="form-group row">
             <label for="inputName" class="col-12 col-form-label">Name</label>
@@ -69,6 +126,15 @@
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script type="module" src="app/main.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
