@@ -49,9 +49,12 @@ export default class BeeController {
   makeComment(comment, id) {
     let Comment = comment.target
     let newComment = {
-      postId: id
-
+      postId: id,
+      name: Comment.name.value,
+      text: Comment.comment.value
     }
+
+    _bs.makeComment(newComment)
   }
 
   deletePost(id) {
@@ -66,7 +69,6 @@ export default class BeeController {
     document.getElementById(id).hidden = false
   }
 
-
   editPost(event) {
     event.preventDefault();
     let data = {
@@ -75,4 +77,8 @@ export default class BeeController {
     }
     _bs.editPost(data)
   }
+  votes(id, str) {
+    _bs.votes(id, str)
+  }
+
 }

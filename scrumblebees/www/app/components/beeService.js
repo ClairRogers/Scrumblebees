@@ -28,6 +28,7 @@ function setState(prop, val) {
 
 export default class BeeService {
 
+
   addSubscribers(prop, fn) {
     _subscribers[prop].push(fn)
   }
@@ -60,6 +61,14 @@ export default class BeeService {
       })
   }
 
+  makeComment(newComment) {
+    event.preventDefault()
+    api.post('comment/' + newComment.postId)
+      .then(res => {
+        this.getComments(newComment.postId)
+      })
+  }
+
   getComments(id) {
     api.get("comments/" + id)
       .then(res => {
@@ -88,6 +97,24 @@ export default class BeeService {
 
   editPost(newData) {
     api.put(('posts/' + newData.id), newData)
+      .then(res => {
+        this.getPosts()
+      })
+  }
+
+  votes(id, str) {
+    let post = _state.posts.find(p => p._id == id)
+    if (str == 'plus') {
+      if (post) {
+        post.value++
+      }
+    } else {
+      if (post) {
+        post.value--
+      }
+    }
+    // this.editPost(post)
+    api.put(('posts/' + id), post)
       .then(res => {
         this.getPosts()
       })

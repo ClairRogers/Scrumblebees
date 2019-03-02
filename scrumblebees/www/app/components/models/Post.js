@@ -7,6 +7,7 @@ export default class Post {
     this.imgUrl = data.imgUrl || 'http://gentlebees.co/wp-content/uploads/2014/12/Gentle-Bee-logo.png'
     this.createdAt = data.createdAt
     this.updatedAt = data.updatedAt
+    this.value = data.value
 
   }
   getTemplate() {
@@ -14,7 +15,8 @@ export default class Post {
     <img class="img-fluid" src="${this.imgUrl}" />
     <h1>${this.name}</h1>
     <p>${this.text}</p>
-     <form onsubmit="app.controllers.beeController.makeComment(event, ${this._id})">
+    <button onclick="app.controllers.beeController.votes('${this._id}', 'plus')">+</button><h3>${this.value}</h3><button onclick="app.controllers.beeController.votes('${this._id}', 'minus')">-</button>
+     <form onsubmit="app.controllers.beeController.makeComment(${event}, ${this._id})">
      <input type="name" name="name">
         <input type="text" name="comment">
           <button class="btn btn-primary" type="submit">Submit</button>
