@@ -66,8 +66,9 @@ export default class Comment {
                     class="fas fa-chevron-down text-dark"></i></h2>
                 </div>
       </div>
-<form id="${this._id}" hidden="true" onsubmit="app.controllers.beeController.subComment(event,'${this._id}')">
-                <input type="text" name="text">
+<form class="mt-2"id="${this._id}" hidden="true" onsubmit="app.controllers.beeController.subComment(event,'${this._id}')">
+                <input type="text" name="name" placeholder="name">
+                <input type="text" name="text" placeholder="reply">
                   <button class="btn btn-info" type="submit">Submit</button>
         </form>
             </div>
@@ -87,11 +88,11 @@ export default class Comment {
       //  <p><u>${subCom.formatDate} ${formatTime}</u></p>
       // `
       template += `
-      <div class="card w-50">
+      <div class="card subwidth">
   <div class="card-body">
     <h5 class="card-title">${subCom.name}</h5>
     <p class="card-text">${subCom.text}</p>
-    <p class="card-text"><small class="text-muted">${subCom.date} ${subCom.time}</small></p>
+    <button class="btn btn-warning" onclick="app.controllers.beeController.deleteSub('${this._id}','${subCom._id}')">Delete</button>
   </div>
 </div>
       `

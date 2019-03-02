@@ -65,6 +65,10 @@ export default class BeeController {
     _bs.mostDown()
   }
 
+  deleteSub(comId, _id) {
+    _bs.subComment({ _id }, comId)
+  }
+
   makeComment(event, id) {
     event.preventDefault()
     let form = event.target
@@ -94,7 +98,7 @@ export default class BeeController {
   }
 
   showSubForm(id) {
-    document.getElementById("sub-" + id).hidden = false
+    document.getElementById(id).hidden = false
   }
 
   subComment(event, id) {
@@ -105,6 +109,7 @@ export default class BeeController {
       name: subComment.name.value,
       text: subComment.text.value
     }
+    subComment.reset()
     _bs.subComment(data, commentId)
   }
 

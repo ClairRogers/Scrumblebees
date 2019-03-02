@@ -14,7 +14,7 @@ router.post('/', (req, res, next) => {
     .catch(next)
 })
 
-//updating subComments on a comment
+//updating subComments on a comment, handles both creation and deletion
 router.put('/:id/sub-comments', (req, res, next) => {
   Comment.findById(req.params.id)
     .then(comment => {
@@ -25,10 +25,11 @@ router.put('/:id/sub-comments', (req, res, next) => {
         comment.subComments.push(req.body)
       } else {
         //delete it
-        let index = comment.subComments.indexOf(req.body._id)
-        if (index != -1) {
-          comment.subComments.splice(index, 1)
-        }
+        comment.subComments.forEach((sc, i) => {
+          if (sc._id.toString() == req.body._id) {
+            comment.subComments.splice(i, 1)
+          }
+        })
       }
       return comment.save()
     })

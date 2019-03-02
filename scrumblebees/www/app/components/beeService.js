@@ -19,7 +19,6 @@ let _subscribers = {
   comments: [],
   targetPostId: [],
   searches: []
-
 }
 
 function setState(prop, val) {
@@ -32,10 +31,9 @@ export default class BeeService {
   subComment(data, commentId) {
     api.put(`/comments/${commentId}/sub-comments`, data)
       .then(res => {
-        console.log(res.data)
+        this.getComments(_state.targetPostId, true)
       })
   }
-
 
   addSubscribers(prop, fn) {
     _subscribers[prop].push(fn)
@@ -114,7 +112,7 @@ export default class BeeService {
     api.post('comments/', newComment)
       .then(res => {
         console.log(res.data)
-        this.getComments(newComment.postId)
+        this.getComments(newComment.postId, true)
       })
   }
 

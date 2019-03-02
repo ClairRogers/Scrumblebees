@@ -108,15 +108,15 @@ export default class Post {
       </div>
       <div class="col-md-7">
         <div class="card-body">
-          <h5 class="card-title">${this.title}</h5>
+          <h4 class="card-title">${this.title}</h4>
+          <h5>by ${this.name}</h5>
           <p class="card-text" id="old-${this.id}">${this.text}</p>
           <p class="card-text"><small class="text-muted">${this.date} ${this.time}</small></p>
           <button class="btn btn-warning" onclick="app.controllers.beeController.getComments('${this._id}')">View Comments</button>
        <button class="btn btn-warning" onclick="app.controllers.beeController.deletePost('${this._id}')">Delete Post</button>
        <button class="btn btn-warning" onclick="app.controllers.beeController.showEditForm('${this._id}')"><i class="far fa-edit"></i></button>
-       <form hidden id="sub-${this._id}" onsubmit="app.controllers.beeController.editPost(event,${this._id})">
-                       <input type="text" name="text" placeholder="comment>
-                       <input type="text' name="name" placeholder="name>
+       <form hidden class="mt-2" id="${this._id}" onsubmit="app.controllers.beeController.editPost(event,'${this._id}')">
+                       <input type="text" name="text">
                       <button class="btn btn-warning" type="submit">Submit</button>
                     </form>
         </div>
