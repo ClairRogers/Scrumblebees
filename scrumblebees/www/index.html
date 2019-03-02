@@ -26,10 +26,48 @@
       </div>
     </div>
   </section>
+  <section class="container">
+    <div class="row">
+      <div id="posts" class="col-8">
+      </div>
+      <div class="col-4">
 
+        <form class="card p-3 sticky-top mt-5" onsubmit="app.controllers.beeController.makeNewPost(event)"
+          id="makePost">
+          <div class="form-group row">
+            <label for="inputName" class="col-12 col-form-label">Name</label>
+            <div class="col-12">
+              <input type="name" name="name" class="form-control" id="inputName" placeholder="Name">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputTitle" class="col-12 col-form-label">Title</label>
+            <div class="col-12">
+              <input type="title" name="title" class="form-control" id="inputTitle" placeholder="Title">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputBuzz" class="col-12 col-form-label">Buzz</label>
+            <div class="col-12">
+              <textarea type="buzz" name="buzz" class="form-control" id="inputBuzz" placeholder="Buzz"></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputImage" class="col-12 col-form-label">Image URL (optional)</label>
+            <div class="col-12">
+              <input type="inputImage" name="image" class="form-control" id="inputImage"
+                placeholder="Enter image url"></input>
+            </div>
+          </div>
+          <button type="submit" class="btn"><img src="./assets/bee.png" id="submitButton"></img>
+            Submit</button>
+        </form>
+      </div>
+    </div>
+  </section>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-  <!-- <script type="module" src="app/main.js"></script> -->
+  <script type="module" src="app/main.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
 </body>
 

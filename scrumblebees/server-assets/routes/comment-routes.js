@@ -3,7 +3,7 @@ let Comment = require("../models/comment")
 let Post = require("../models/post")
 
 router.get('/:postId', (req, res, next) => {
-  Comment.find({ post: req.params.postId })
+  Comment.find({ postId: req.params.postId })
     .then(comments => res.status(200).send(comments))
     .catch(next)
 })
@@ -39,7 +39,7 @@ router.put('/:id/sub-comments', (req, res, next) => {
 router.delete('/:id', (req, res, next) => {
   Comment.findOneAndDelete({ _id: req.params.id })
     .then(oldData => {
-      res.status(200).send('Successfully deleted comment')
+      res.status(200).send({ message: 'Successfully deleted comment', postId: oldData.postId })
     })
     .catch(err => {
       res.status(500).send({ Error: err })

@@ -4,7 +4,8 @@ let Schema = mongoose.Schema
 
 
 let post = new Schema({
-  name: { type: String, required: false },
+  name: { type: String, required: true },
+  title: { type: String, required: false },
   text: { type: String, require: true },
   imgUrl: { type: String, required: false }
 }, {

@@ -8,4 +8,19 @@ body {
   height: 100vh;
   background-image: url('./background.jpg');
   background-size: cover;
+  background-attachment: fixed;
+}
+
+.btn {
+background-color:grey;
+color:rgb(255, 204, 0);
+}
+
+#posts {
+  z-index: 10
+}
+
+#submitButton {
+  max-height:30px;
+  width:auto;
 }
