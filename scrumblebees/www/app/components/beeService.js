@@ -153,7 +153,6 @@ export default class BeeService {
         console.log(res.data)
         document.getElementById('old-' + oldId).innerText = res.data.text
       })
-    form.reset()
   }
 
   votes(id, str) {

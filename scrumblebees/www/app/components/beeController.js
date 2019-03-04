@@ -121,6 +121,7 @@ export default class BeeController {
       text: event.target.text.value
     }
     _bs.editPost(data, oldId)
+    event.target.reset()
   }
   votes(id, str) {
     _bs.votes(id, str)

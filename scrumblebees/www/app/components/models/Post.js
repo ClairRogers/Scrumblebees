@@ -110,7 +110,7 @@ export default class Post {
         <div class="card-body">
           <h4 class="card-title">${this.title}</h4>
           <h5>by ${this.name}</h5>
-          <p class="card-text" id="old-${this.id}">${this.text}</p>
+          <p class="card-text" id="old-${this._id}">${this.text}</p>
           <p class="card-text"><small class="text-muted">${this.date} ${this.time}</small></p>
           <button class="btn btn-warning" onclick="app.controllers.beeController.getComments('${this._id}')">View Comments</button>
        <button class="btn btn-warning" onclick="app.controllers.beeController.deletePost('${this._id}')">Delete Post</button>
